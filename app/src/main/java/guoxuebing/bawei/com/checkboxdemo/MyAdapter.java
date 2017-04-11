@@ -49,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 list.get(position).setFlag(!list.get(position).isFlag());
+
                 if (list.get(position).isFlag()) {
                     price += list.get(position).getPrice();
                 }else {

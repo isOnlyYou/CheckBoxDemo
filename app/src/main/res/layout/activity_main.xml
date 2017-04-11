@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:text="总价为："
+            android:text="总价为：0.0 元"
             android:background="@color/colorAccent"
             android:textSize="20sp"
             android:id="@+id/tx_total_price"/>
