@@ -26,6 +26,18 @@
             android:textSize="20sp"
             android:id="@+id/cb_quanxuan"/>
 
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="反选"
+            android:gravity="center"
+            android:background="#000"
+            android:textColor="#fff"
+            android:layout_marginLeft="15dp"
+            android:button="@drawable/cb_selector"
+            android:textSize="20sp"
+            android:id="@+id/tx_fanxuan"/>
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"

@@ -48,6 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.item_cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 list.get(position).setFlag(!list.get(position).isFlag());
 
                 if (list.get(position).isFlag()) {

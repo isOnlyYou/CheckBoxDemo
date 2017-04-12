@@ -19,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Goods> list;
 
+    //全选框是否选中的标识
     private boolean flag = false;
     private MyAdapter adapter;
+    private TextView tx_fanxuan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+
     }
 
     private void initView() {
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
         cb_quanxuan = (CheckBox) findViewById(R.id.cb_quanxuan);
+        tx_fanxuan = (TextView) findViewById(R.id.tx_fanxuan);
         tx_total_price = (TextView) findViewById(R.id.tx_total_price);
 
         initData();
@@ -90,15 +94,44 @@ public class MainActivity extends AppCompatActivity {
             public void setPrice(float price) {
                 tx_total_price.setText("总价为："+price+" 元");
 
-                for (int i = 0; i < list.size(); i++) {
-                    if (!list.get(i).isFlag()){
-                        cb_quanxuan.setChecked(false);
-                        break;
-                    }else {
-                        cb_quanxuan.setChecked(true);
-                    }
-                }
+                setQuanXuanGL();
             }
         });
+
+        cbFxListener();
+    }
+
+    private void cbFxListener() {
+        tx_fanxuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).isFlag()){
+                        list.get(i).setFlag(false);
+                        adapter.setPrice(adapter.getPrice()-list.get(i).getPrice());
+                    }else {
+                        list.get(i).setFlag(true);
+                        adapter.setPrice(adapter.getPrice()+list.get(i).getPrice());
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                tx_total_price.setText("总价为："+adapter.getPrice()+" 元");
+
+                setQuanXuanGL();
+            }
+        });
+    }
+
+    //遍历集合，判断全选框是否应该选中
+    private void setQuanXuanGL() {
+        for (int i = 0; i < list.size(); i++) {
+            if (!list.get(i).isFlag()){
+                cb_quanxuan.setChecked(false);
+                break;
+            }else {
+                cb_quanxuan.setChecked(true);
+            }
+        }
     }
 }
